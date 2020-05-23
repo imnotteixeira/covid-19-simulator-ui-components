@@ -1,5 +1,5 @@
-import React from "react";
-import { ResponsiveLineCanvas } from "@nivo/line";
+const React = require("react");
+const { ResponsiveLineCanvas } = require("@nivo/line");
 
 const GeneralChart = ({ data }) => (
     <ResponsiveLineCanvas
@@ -28,7 +28,7 @@ const GeneralChart = ({ data }) => (
         enableGridX={false}
         colors={{ scheme: "nivo" }}
         lineWidth={1}
-        pointSize={4}
+        pointSrize={4}
         pointColor={{ theme: "background" }}
         pointBorderWidth={1}
         pointBorderColor={{ from: "serieColor" }}
