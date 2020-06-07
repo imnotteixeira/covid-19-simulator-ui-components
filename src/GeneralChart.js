@@ -1,5 +1,5 @@
-const React = require("react");
-const { ResponsiveLineCanvas } = require("@nivo/line");
+import React from "react";
+import { ResponsiveLineCanvas } from "@nivo/line";
 
 const GeneralChart = ({ data }) => (
     <ResponsiveLineCanvas
@@ -67,4 +67,4 @@ const GeneralChart = ({ data }) => (
     />
 );
 
-module.exports = GeneralChart;
+export default GeneralChart;

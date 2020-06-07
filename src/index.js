@@ -1,7 +1,7 @@
-const GeneralChart = require("./GeneralChart");
-const MatrixHeatMap = require("./MatrixHeatMap");
+import GeneralChart from "./GeneralChart";
+import MatrixHeatMap from "./MatrixHeatMap";
 
-module.exports = {
+export {
     GeneralChart,
     MatrixHeatMap,
 };
