@@ -20,7 +20,15 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-const getMatrixCellForIndividual = (i, totalIndividuals) => Math.floor(i * MATRIX_SIDE * MATRIX_SIDE / totalIndividuals);
+const convertToXYCoord = (index, matrixSide) => ([Math.floor(index / matrixSide), index % matrixSide]);
+
+const getMatrixCellForIndividual = (i, totalIndividuals) => {
+
+    const originalMatrixSide = Math.round(Math.sqrt(totalIndividuals));
+    return convertToXYCoord(i, originalMatrixSide)
+        .map((coord) => Math.floor(coord * MATRIX_SIDE / originalMatrixSide));
+};
+
 const getHeatMapData = (values) => {
 
     const result = Array.from(Array(MATRIX_SIDE).keys()).map((i) => ({
@@ -28,13 +36,10 @@ const getHeatMapData = (values) => {
     }));
 
     values.forEach((value, i) => {
-        const cell = getMatrixCellForIndividual(i, values.length);
-        const y = Math.floor(cell / MATRIX_SIDE);
-        const x = (cell % MATRIX_SIDE).toString();
-        if (result[x][y] === undefined) result[x][y] = 0;
-        result[x][y] += value;
+        const [line, col] = getMatrixCellForIndividual(i, values.length);
+        if (result[line][col] === undefined) result[line][col] = 0;
+        result[line][col] += value;
     });
-
 
     return result;
 };
@@ -42,14 +47,12 @@ const getHeatMapData = (values) => {
 const MatrixHeatMap = ({ values: metricValues, showLatestStep }) => {
 
     const [selectedStep, setSelectedStep] = React.useState(0);
-    const values = showLatestStep ? metricValues : metricValues[selectedStep];
-    const [data, setData] = React.useState(getHeatMapData(values));
-
-
     React.useEffect(() => {
-        if (!showLatestStep) setData(getHeatMapData(metricValues[selectedStep]));
-        else setData(getHeatMapData(metricValues));
-    }, [showLatestStep, metricValues, selectedStep]);
+        if (!showLatestStep) setSelectedStep(metricValues.length - 1);
+    }, [showLatestStep]);
+
+    const values = showLatestStep ? metricValues : metricValues[selectedStep];
+    const data = getHeatMapData(values);
 
 
     const classes = useStyles();
