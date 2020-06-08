@@ -1,10 +1,10 @@
 import React from "react";
 import { ResponsiveLineCanvas } from "@nivo/line";
 
-const GeneralChart = ({ data }) => (
+const GeneralChart = ({ data, legendSize }) => (
     <ResponsiveLineCanvas
         data={data}
-        margin={{ top: 50, right: 160, bottom: 50, left: 60 }}
+        margin={{ top: 50, right: 50, bottom: 100, left: 60 }}
         xScale={{ type: "linear", min: 0, max: "auto"  }}
         yScale={{ type: "linear", stacked: false, min: 0, max: "auto" }}
         curve="monotoneX"
@@ -36,18 +36,16 @@ const GeneralChart = ({ data }) => (
         pointLabel="y"
         pointLabelYOffset={-12}
         useMesh={true}
-        // gridXValues={[0, 20, 40, 60, 80, 100, 120]}
-        // gridYValues={[0, 500, 1000, 1500, 2000, 2500]}
         legends={[
             {
-                anchor: "bottom-right",
-                direction: "column",
+                anchor: "bottom",
+                direction: "row",
                 justify: false,
-                translateX: 140,
-                translateY: 0,
-                itemsSpacing: 2,
+                translateX: 0,
+                translateY: 80,
+                itemsSpacing: 0,
                 itemDirection: "left-to-right",
-                itemWidth: 80,
+                itemWidth: legendSize || 120,
                 itemHeight: 12,
                 itemOpacity: 0.75,
                 symbolSize: 12,

@@ -2,11 +2,17 @@ import React from "react";
 import { ResponsiveHeatMapCanvas } from "@nivo/heatmap";
 import { Slider, makeStyles, Typography } from "@material-ui/core";
 
-const MATRIX_SIDE = 10;
+const MATRIX_SIDE = 20;
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
+    heatMapSliderWrapper: {
+        width: "100%",
+        padding: theme.spacing(1),
+        display: "flex",
+    },
     heatMapSlider: {
-        width: "70%",
+        // width: "100%",
+        // padding: theme.spacing(2),
     },
     wrapper: {
         display: "flex",
@@ -17,6 +23,16 @@ const useStyles = makeStyles(() => ({
     mapWrapper: {
         width: "100%",
         height: "90%",
+    },
+    sliderWrapper: {
+        display: "flex",
+        width: "70%",
+    },
+    sliderLabel: {
+        display: "flex",
+        alignItems: "center",
+        width: "80px",
+        padding: theme.spacing(1),
     },
 }));
 
@@ -63,7 +79,7 @@ const MatrixHeatMap = ({ values: metricValues, showLatestStep }) => {
                     data={data}
                     keys={Array.from(Array(MATRIX_SIDE).keys()).map((i) => i.toString())}
                     indexBy="line"
-                    margin={{ top: 100, right: 60, bottom: 60, left: 60 }}
+                    margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
                     minValue={0}
                     maxValue={values.every((el) => el === 0) ? 1 : "auto"}
                     tooltip={({ xKey, yKey, value }) => (
@@ -100,17 +116,25 @@ const MatrixHeatMap = ({ values: metricValues, showLatestStep }) => {
                 />
             </div>
             {!showLatestStep &&
-
-                <Slider
-                    className={classes.heatMapSlider}
-                    color="primary"
-                    value={selectedStep}
-                    onChange={(_, val) => setSelectedStep(val)}
-                    aria-labelledby="heat-map-display-day"
-                    max={metricValues.length - 1}
-                    min={0}
-                    step={1}
-                />
+                <div className={classes.sliderWrapper}>
+                    <div className={classes.sliderLabel}>
+                        <Typography variant="caption">
+                            {`Day ${selectedStep}`}
+                        </Typography>
+                    </div>
+                    <div className={classes.heatMapSliderWrapper}>
+                        <Slider
+                            className={classes.heatMapSlider}
+                            color="primary"
+                            value={selectedStep}
+                            onChange={(_, val) => setSelectedStep(val)}
+                            aria-labelledby="heat-map-display-day"
+                            max={metricValues.length - 1}
+                            min={0}
+                            step={1}
+                        />
+                    </div>
+                </div>
             }
         </div>
     );
