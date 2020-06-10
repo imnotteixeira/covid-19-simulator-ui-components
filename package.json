@@ -1,6 +1,6 @@
 {
   "name": "@imnotteixeira/covid-19-simulator-ui-components",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "React components for using in the web visualizations of covid-19-simulator project",
   "main": "dist/index.js",
   "scripts": {
