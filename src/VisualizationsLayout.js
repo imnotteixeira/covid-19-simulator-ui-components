@@ -10,11 +10,11 @@ import {
 } from "@material-ui/core";
 
 const DISEASE_OUTCOMES_METRIC_LABELS = {
-    "carrier-count": "Suspect Carriers",
-    "dead-count": "Dead",
-    "cured-count": "Cured",
+    "carrier-absolute-count": "Suspect Carriers",
+    "dead-absolute-count": "Dead",
+    "cured-absolute-count": "Cured",
     "hospitalized-count": "Hospitalized",
-    "confirmed-carrier-count": "Confirmed Carriers",
+    "confirmed-carrier-cumulative-count": "Confirmed Carriers",
 };
 
 const EPIDEMIC_METRIC_LABELS = {
